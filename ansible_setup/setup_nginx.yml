@@ -1,0 +1,14 @@
+---
+- name: Setup NGINX on Servers
+  hosts: nginx-servers
+  become: yes
+  roles:
+    - setup_nginx
+
+- name: Setup NGINX Load Balancer
+  hosts: nginx-lb
+  become: yes
+  vars:
+    nginx_upstream_servers: "{{ backend_servers }}"
+  roles:
+    - nginx-lb

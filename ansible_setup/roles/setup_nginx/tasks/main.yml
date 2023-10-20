@@ -1,0 +1,16 @@
+---
+- name: Update apt repo and cache on all ubuntu
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+    force_apt_get: true
+
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+
+- name: Copy index.html for respective servers
+  template:
+    src: nginx_index.html.j2
+    dest: /var/www/html/index.html
